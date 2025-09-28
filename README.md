@@ -6,3 +6,16 @@ REST API для интернет-магазина, написанный на **L
 
 ## 📂 Структура проекта
 
+/
+├── myapp/ # Код Laravel-приложения
+│ ├── app/
+│ ├── bootstrap/
+│ ├── config/
+│ ├── database/
+│ ├── public/
+│ ├── routes/
+│ └── ...
+├── docker/ # Конфигурации Docker
+├── .env.example # Шаблон переменных окружения
+├── docker-compose.yml # Описание сервисов
+└── README.md
