@@ -27,7 +27,7 @@ cp .env.example .env
 
 `APP_NAME`, `APP_ENV`, `APP_URL`
 
-`DB_HOST` (обычно = postgres)
+`DB_HOST`
 
 `DB_PORT=5432`
 
