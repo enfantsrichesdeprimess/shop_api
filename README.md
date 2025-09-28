@@ -1,10 +1,10 @@
-# 🛍️ Shop API
+# Shop API
 
 REST API для интернет-магазина, написанный на **Laravel 12**, с базой данных **PostgreSQL** и контейнеризацией через **Docker**.
 
 ---
 
-## 🧰 Требования
+## Требования
 
 - [Docker](https://www.docker.com/) >= 20.x  
 - [Docker Compose](https://docs.docker.com/compose/) >= 2.x  
@@ -12,7 +12,7 @@ REST API для интернет-магазина, написанный на **L
 
 ---
 
-## 🚀 Запуск проекта
+## Запуск проекта
 
 1. Клонировать репозиторий:
    ```bash
@@ -32,3 +32,23 @@ cp .env.example .env
 `DB_PORT=5432`
 
 `DB_DATABASE`, `DB_USERNAME`, `DB_PASSWORD`
+
+4. Собрать и запустить контейнеры
+   ```bash
+   docker compose up -d --build
+    ```
+5.Установить зависимости
+```bash
+docker compose exec app composer install
+```
+6.Сгенерировать ключ приложения
+```bash
+docker compose exec app php artisan key:generate
+```
+7.Выполнить миграции и сиды
+```bash
+docker compose exec app php artisan migrate --seed
+```
+
+
+
