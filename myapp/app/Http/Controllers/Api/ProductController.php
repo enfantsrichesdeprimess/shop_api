@@ -2,9 +2,13 @@
 
 namespace App\Http\Controllers\Api;
 
+use App\Http\Actions\DeleteProductAction;
+use App\Http\Actions\CreateProductAction;
+use App\Http\Actions\UpdateProductAction;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\StoreProductRequest;
 use App\Http\Requests\UpdateProductRequest;
+use App\Http\Actions\IndexProductsAction;
 use App\Models\Product;
 use Illuminate\Http\JsonResponse;
 use App\Http\Resources\ProductResource;
@@ -16,8 +20,12 @@ class ProductController extends Controller
      */
     public function index(): JsonResponse
     {
-        $products = ProductResource::collection(Product::all());
-        return response()->json($products);
+        return response()->json(IndexProductsAction::execute());
+    }
+
+    public function detailedIndex(Product $product): JsonResponse
+    {
+        return response()->json($product);
     }
 
 
@@ -26,7 +34,11 @@ class ProductController extends Controller
      */
     public function store(StoreProductRequest $request)
     {
-        //
+        $product = CreateProductAction::execute($request);
+        return response()->json([
+            $product,
+            'message' => 'Product created successfully.'
+            ]);
     }
 
     /**
@@ -42,7 +54,11 @@ class ProductController extends Controller
      */
     public function update(UpdateProductRequest $request, Product $product)
     {
-        //
+        $product = UpdateProductAction::execute($request, $product);
+        return response()->json([
+            $product,
+            'message' => 'Продукт успешно обновлен'
+        ]);
     }
 
     /**
@@ -50,7 +66,10 @@ class ProductController extends Controller
      */
     public function destroy(Product $product)
     {
-        //
+        DeleteProductAction::execute($product);
+        return response()->json([
+            'message' => 'Товар удален'
+            ]);
     }
 }
 
