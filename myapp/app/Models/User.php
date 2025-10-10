@@ -43,4 +43,19 @@ class User extends Authenticatable
             'password' => 'hashed',
         ];
     }
+
+    public function cartItems(): \Illuminate\Database\Eloquent\Relations\HasMany
+    {
+        return $this->hasMany(Cart::class);
+    }
+
+    public function cartProducts(){
+        return $this->hasMany(Cart::class, 'cart_items')
+            ->withPivot('quantity')->withTimestamps();
+    }
+
+    public function orders()
+    {
+        return $this->hasMany(Order::class);
+    }
 }

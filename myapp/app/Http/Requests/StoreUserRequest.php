@@ -27,4 +27,12 @@ class StoreUserRequest extends FormRequest
             'password' => 'string|required|max:255',
         ];
     }
+
+    public function messages()
+    {
+       return [
+           'fio.required' => 'Поле "fio" обьязательно для заполнения"'
+       ];
+
+    }
 }
